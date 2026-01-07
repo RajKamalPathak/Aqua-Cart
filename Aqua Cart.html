@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Aqua Cart | Private Aquarium Collection</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="Aqua Cart.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-mark">◇</span>
+        <div class="brand-text">
+          <span class="brand-name">Aqua Cart</span>
+          <span class="brand-sub">Private Aquarium Collection</span>
+        </div>
+      </div>
+
+      <nav class="main-nav" id="mainNav">
+        <a href="#home">Home</a>
+        <a href="#collections">Collections</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#contact">Consultation</a>
+      </nav>
+
+      <div class="topbar-right">
+        <div class="cart-chip">Wishlist: <span id="cartTotal">0</span></div>
+        <button class="btn-small" id="loginButton">Client Login</button>
+        <button class="menu-toggle" id="menuToggle">☰</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" id="home">
+        <div class="hero-text">
+          <p class="hero-greeting" id="heroGreeting">Welcome to Aqua Cart</p>
+          <h1>Rare aquarium fish for private residences.</h1>
+          <p class="hero-desc">
+            Aqua Cart curates hand-selected koi, arowana and designer freshwater
+            fish, prepared for luxury homes, penthouses and boutique spaces.
+          </p>
+
+          <div class="hero-buttons">
+            <button class="btn-primary" id="btnViewCollections">
+              View collections
+            </button>
+            <button class="btn-outline" id="btnRequestPlan">
+              Request a custom tank
+            </button>
+          </div>
+
+          <div class="hero-stat-row">
+            <div class="stat-card">
+              <span class="stat-label">Koi ponds</span>
+              <span class="stat-value">18+</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-label">Signature arowana</span>
+              <span class="stat-value">12</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-label">Private clients</span>
+              <span class="stat-value">40+</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-right">
+          <div class="hero-image-wrapper">
+            <img src="hero.webp" alt="Luxury Aquarium" class="hero-image" />
+          </div>
+          <div class="hero-highlight">
+            <div class="highlight-card">
+              <p class="highlight-tag">Featured specimen</p>
+              <h2 class="highlight-name">Golden Highback Arowana</h2>
+              <p class="highlight-line">
+                Imported, microchipped, lineage certificate included.
+              </p>
+              <p class="highlight-meta">Approx. length: 35 cm</p>
+              <p class="highlight-price">₹3,75,000</p>
+              <button class="btn-primary js-add-cart">Add to wishlist</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="collections">
+        <h2 class="section-title">Curated collections</h2>
+        <p class="section-text">
+          Each collection is assembled with water chemistry, lighting and
+          aquascape style in mind, designed to fit into premium living spaces.
+        </p>
+
+        <div class="card-grid">
+          <article class="fish-card">
+            <img src="koi.avif" alt="Koi Fish" class="fish-photo" />
+            <h3>Japanese Koi Set</h3>
+            <p>Handpicked Gosanke koi with beautiful patterns.</p>
+            <p class="fish-detail">Set of 6 koi, 20–25 cm</p>
+            <p class="fish-price">From ₹1,25,000</p>
+            <button class="btn-small js-add-cart">Add to wishlist</button>
+          </article>
+
+          <article class="fish-card">
+            <img src="discuss.jpg" alt="Discus Fish" class="fish-photo" />
+            <h3>Galaxy Discus Pair</h3>
+            <p>Striking color for minimal interiors.</p>
+            <p class="fish-detail">Paired, 12–14 cm</p>
+            <p class="fish-price">₹85,000</p>
+            <button class="btn-small js-add-cart">Add to wishlist</button>
+          </article>
+
+          <article class="fish-card">
+            <img src="ranchu.jpg" alt="Black Ranchu" class="fish-photo" />
+            <h3>Black Ranchu Collection</h3>
+            <p>Compact luxury for desktops or study rooms.</p>
+            <p class="fish-detail">Group of 4 ranchu</p>
+            <p class="fish-price">₹48,000</p>
+            <button class="btn-small js-add-cart">Add to wishlist</button>
+          </article>
+        </div>
+      </section>
+
+      <section class="section section-soft" id="gallery">
+        <h2 class="section-title">Atmosphere preview</h2>
+        <p class="section-text">
+          Soft lighting, quiet water movement, a luxury focal point.
+        </p>
+
+        <div class="gallery-row">
+          <div class="gallery-tile">
+            <img src="gallery1.jpeg" alt="Gallery 1" class="gallery-img" />
+            <span class="gallery-title">Penthouse koi terrace</span>
+            <span class="gallery-note">Warm lighting and stone finishes</span>
+          </div>
+          <div class="gallery-tile">
+            <img src="gallery2.jpg" alt="Gallery 2" class="gallery-img" />
+            <span class="gallery-title">Minimal living room tank</span>
+            <span class="gallery-note">Discus and muted aquascape</span>
+          </div>
+          <div class="gallery-tile">
+            <img src="gallery3.jpg" alt="Gallery 3" class="gallery-img" />
+            <span class="gallery-title">Executive study corner</span>
+            <span class="gallery-note"
+              >Single arowana in a black frame tank</span
+            >
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="contact">
+        <h2 class="section-title">Private consultation</h2>
+        <p class="section-text">
+          Share your idea. We will help design your aquatic space.
+        </p>
+        <form class="contact-form" id="contactForm">
+          <input type="text" id="userName" placeholder="Your name" />
+          <input type="text" id="userCity" placeholder="City" />
+          <input type="email" id="userEmail" placeholder="Email address" />
+          <textarea
+            id="userMessage"
+            rows="3"
+            placeholder="Describe your space or idea"
+          ></textarea>
+          <button type="submit" class="btn-primary">Request a call</button>
+          <p id="contactInfo" class="info-text"></p>
+        </form>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>© 2025 Aqua Cart. Discreet luxury aquarium services.</p>
+    </footer>
+
+    <script src="Aqua Cart.js"></script>
+  </body>
+</html>
