@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -24,8 +24,22 @@
       </nav>
 
       <div class="topbar-right">
-        <div class="cart-chip">Wishlist: <span id="cartTotal">0</span></div>
-        <button class="btn-small" id="loginButton">Client Login</button>
+        <div class="cart-chip" id="openCart">
+          Cart: <span id="cartTotal">0</span>
+        </div>
+
+        <button class="btn-small" id="bookNowButton">Book Now</button>
+
+        <div id="authButtons">
+          <button class="btn-small" id="loginButton">Client Login</button>
+          <button
+            class="btn-small"
+            onclick="window.location.href = 'Register.html'"
+          >
+            Register
+          </button>
+        </div>
+
         <button class="menu-toggle" id="menuToggle">☰</button>
       </div>
     </header>
@@ -78,7 +92,7 @@
               </p>
               <p class="highlight-meta">Approx. length: 35 cm</p>
               <p class="highlight-price">₹3,75,000</p>
-              <button class="btn-primary js-add-cart">Add to wishlist</button>
+              <button class="btn-primary js-add-cart">Add to cart</button>
             </div>
           </div>
         </div>
@@ -98,7 +112,7 @@
             <p>Handpicked Gosanke koi with beautiful patterns.</p>
             <p class="fish-detail">Set of 6 koi, 20–25 cm</p>
             <p class="fish-price">From ₹1,25,000</p>
-            <button class="btn-small js-add-cart">Add to wishlist</button>
+            <button class="btn-small js-add-cart">Add to cart</button>
           </article>
 
           <article class="fish-card">
@@ -107,7 +121,7 @@
             <p>Striking color for minimal interiors.</p>
             <p class="fish-detail">Paired, 12–14 cm</p>
             <p class="fish-price">₹85,000</p>
-            <button class="btn-small js-add-cart">Add to wishlist</button>
+            <button class="btn-small js-add-cart">Add to cart</button>
           </article>
 
           <article class="fish-card">
@@ -116,7 +130,7 @@
             <p>Compact luxury for desktops or study rooms.</p>
             <p class="fish-detail">Group of 4 ranchu</p>
             <p class="fish-price">₹48,000</p>
-            <button class="btn-small js-add-cart">Add to wishlist</button>
+            <button class="btn-small js-add-cart">Add to cart</button>
           </article>
         </div>
       </section>
@@ -141,9 +155,9 @@
           <div class="gallery-tile">
             <img src="gallery3.jpg" alt="Gallery 3" class="gallery-img" />
             <span class="gallery-title">Executive study corner</span>
-            <span class="gallery-note"
-              >Single arowana in a black frame tank</span
-            >
+            <span class="gallery-note">
+              Single arowana in a black frame tank
+            </span>
           </div>
         </div>
       </section>
@@ -153,6 +167,7 @@
         <p class="section-text">
           Share your idea. We will help design your aquatic space.
         </p>
+
         <form class="contact-form" id="contactForm">
           <input type="text" id="userName" placeholder="Your name" />
           <input type="text" id="userCity" placeholder="City" />
@@ -172,6 +187,34 @@
       <p>© 2025 Aqua Cart. Discreet luxury aquarium services.</p>
     </footer>
 
+    <div
+      id="cartModal"
+      style="
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.6);
+        z-index: 999;
+      "
+    >
+      <div
+        style="
+          background: #020617;
+          max-width: 520px;
+          margin: 8% auto;
+          padding: 20px;
+          border-radius: 14px;
+        "
+      >
+        <h3>Your Cart</h3>
+        <div id="cartItems"></div>
+        <hr />
+        <p><strong>Total:</strong> ₹<span id="cartSum">0</span></p>
+
+        <button id="payNowBtn" class="btn-primary">Proceed to Payment</button>
+        <button class="btn-outline" onclick="closeCart()">Close</button>
+      </div>
+    </div>
     <script src="Aqua Cart.js"></script>
   </body>
 </html>

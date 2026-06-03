@@ -1,76 +1,196 @@
-const heroGreeting = document.getElementById("heroGreeting");
+document.addEventListener("DOMContentLoaded", () => {
+  const heroGreeting = document.getElementById("heroGreeting");
+  const loginButton = document.getElementById("loginButton");
+  const cartTotal = document.getElementById("cartTotal");
 
-function updateGreeting() {
-  const hour = new Date().getHours();
-  let text = "Welcome to Aqua Cart";
+  function updateGreeting() {
+    const hour = new Date().getHours();
+    let text = "Welcome to Aqua Cart";
 
-  if (hour >= 6 && hour < 12) {
-    text = "Morning viewings at Aqua Cart";
-  } else if (hour >= 12 && hour < 17) {
-    text = "Afternoon selections at Aqua Cart";
-  } else if (hour >= 17 && hour < 22) {
-    text = "Evening ambience by Aqua Cart";
-  } else {
-    text = "After-hours concierge by Aqua Cart";
+    if (hour < 12) text = "Morning viewings at Aqua Cart";
+    else if (hour < 17) text = "Afternoon selections at Aqua Cart";
+    else if (hour < 22) text = "Evening ambience by Aqua Cart";
+    else text = "After-hours concierge by Aqua Cart";
+
+    heroGreeting.textContent = text;
   }
 
-  heroGreeting.textContent = text;
-}
+  updateGreeting();
 
-updateGreeting();
+  /* LOGIN STATE */
+  function updateLoginUI() {
+    const clientName = localStorage.getItem("client_name");
 
-const menuToggle = document.getElementById("menuToggle");
-const mainNav = document.getElementById("mainNav");
+    if (clientName) {
+      loginButton.textContent = "Logout (" + clientName + ")";
+    } else {
+      loginButton.textContent = "Client Login";
+      cartTotal.textContent = "0";
+    }
+  }
 
-menuToggle.addEventListener("click", function () {
-  mainNav.classList.toggle("show");
-});
+  updateLoginUI();
 
-let cartCount = 0;
-const cartTotal = document.getElementById("cartTotal");
-const cartButtons = document.querySelectorAll(".js-add-cart");
+  /* LOGIN / LOGOUT */
+  loginButton.addEventListener("click", () => {
+    const clientName = localStorage.getItem("client_name");
 
-cartButtons.forEach(function (button) {
-  button.addEventListener("click", function () {
-    cartCount++;
-    cartTotal.textContent = cartCount;
+    if (clientName) {
+      localStorage.removeItem("client_name");
+      alert("Logged out");
+      location.reload();
+    } else {
+      window.location.href = "login.html";
+    }
   });
-});
 
-const btnViewCollections = document.getElementById("btnViewCollections");
-const btnRequestPlan = document.getElementById("btnRequestPlan");
+  /* CART */
+  let cartCount = 0;
 
-btnViewCollections.addEventListener("click", function () {
-  document.getElementById("collections").scrollIntoView({ behavior: "smooth" });
-});
+  function loadCartCount() {
+    const clientName = localStorage.getItem("client_name");
+    if (!clientName) return;
 
-btnRequestPlan.addEventListener("click", function () {
-  document.getElementById("contact").scrollIntoView({ behavior: "smooth" });
-});
-
-const contactForm = document.getElementById("contactForm");
-const contactInfo = document.getElementById("contactInfo");
-
-contactForm.addEventListener("submit", function (event) {
-  event.preventDefault();
-
-  const nameValue = document.getElementById("userName").value.trim();
-  const cityValue = document.getElementById("userCity").value.trim();
-  const emailValue = document.getElementById("userEmail").value.trim();
-  const messageValue = document.getElementById("userMessage").value.trim();
-
-  if (!nameValue || !cityValue || !emailValue || !messageValue) {
-    contactInfo.style.color = "#f97373";
-    contactInfo.textContent = "Please share all details so we can plan properly.";
-  } else {
-    contactInfo.style.color = "#4ade80";
-    contactInfo.textContent = "Thank you. A curator will contact you shortly.";
-    contactForm.reset();
+    fetch(`http://localhost:3000/cart/${clientName}`)
+      .then((res) => res.json())
+      .then((data) => {
+        cartCount = data.length;
+        cartTotal.textContent = cartCount;
+      });
   }
-});
 
-const loginButton = document.getElementById("loginButton");
+  loadCartCount();
 
-loginButton.addEventListener("click", function () {
-  alert("Client login will be enabled in the next Aqua Cart phase.");
+  /* ADD TO CART */
+  document.querySelectorAll(".js-add-cart").forEach((button) => {
+    button.addEventListener("click", () => {
+      const clientName = localStorage.getItem("client_name");
+
+      if (!clientName) {
+        alert("Please login first");
+        return;
+      }
+
+      let card = button.closest(".fish-card");
+
+      if (!card) {
+        card = button.closest(".highlight-card");
+      }
+
+      if (!card) {
+        alert("Unable to identify item");
+        return;
+      }
+
+      const fishName =
+        card.querySelector("h3")?.innerText ||
+        card.querySelector(".highlight-name")?.innerText;
+
+      const priceText =
+        card.querySelector(".fish-price")?.innerText ||
+        card.querySelector(".highlight-price")?.innerText;
+      const price = parseInt(priceText.replace(/\D/g, ""));
+
+      fetch("http://localhost:3000/cart/add", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          client_name: clientName,
+          fish_name: fishName,
+          price: price,
+        }),
+      }).then(() => loadCartCount());
+    });
+  });
+  const bookNowButton = document.getElementById("bookNowButton");
+
+  bookNowButton.addEventListener("click", () => {
+    const clientName = localStorage.getItem("client_name");
+
+    if (!clientName) {
+      alert("Please login first");
+      return;
+    }
+
+    fetch(`http://localhost:3000/cart/${clientName}`)
+      .then((res) => res.json())
+      .then((items) => {
+        if (items.length === 0) {
+          alert("Cart is empty");
+          return;
+        }
+
+        const confirmBooking = confirm(
+          "Confirm booking for " + items.length + " item(s)?",
+        );
+
+        if (!confirmBooking) return;
+
+        fetch(`http://localhost:3000/cart/clear/${clientName}`, {
+          method: "DELETE",
+        }).then(() => {
+          cartCount = 0;
+          cartTotal.textContent = "0";
+          alert("Booking successful");
+        });
+      });
+  });
+  const openCart = document.getElementById("openCart");
+  if (!openCart) return;
+
+  const cartModal = document.getElementById("cartModal");
+  const cartItemsDiv = document.getElementById("cartItems");
+  const cartSumSpan = document.getElementById("cartSum");
+
+  window.closeCart = function () {
+    cartModal.style.display = "none";
+  };
+
+  openCart.addEventListener("click", () => {
+    const clientName = localStorage.getItem("client_name");
+
+    if (!clientName) {
+      alert("Please login first");
+      return;
+    }
+
+    fetch(`http://localhost:3000/cart/${clientName}`)
+      .then((res) => res.json())
+      .then((items) => {
+        if (items.length === 0) {
+          alert("Cart is empty");
+          return;
+        }
+
+        let total = 0;
+        cartItemsDiv.innerHTML = "";
+
+        items.forEach((item) => {
+          total += item.price;
+          cartItemsDiv.innerHTML += `
+          <p>${item.fish_name} — ₹${item.price}</p>
+        `;
+        });
+
+        cartSumSpan.textContent = total;
+        cartModal.style.display = "block";
+      });
+  });
+  document.getElementById("payNowBtn").addEventListener("click", () => {
+    const clientName = localStorage.getItem("client_name");
+
+    alert("Redirecting to payment gateway...");
+
+    setTimeout(() => {
+      alert("Payment successful");
+
+      fetch(`http://localhost:3000/cart/clear/${clientName}`, {
+        method: "DELETE",
+      }).then(() => {
+        cartTotal.textContent = "0";
+        closeCart();
+        alert("Booking confirmed");
+      });
+    }, 1200);
+  });
 });
