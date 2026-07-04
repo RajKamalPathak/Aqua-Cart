@@ -16,26 +16,32 @@ This project is currently in a migration phase from Vanilla JS UI to React.
 ## 📸 Preview
 
 ## 🏠 Home Experience
-<p align="center">
-  <img src="./docs/home-hero.png" alt="Home Hero" width="48%" />
-  <img src="./docs/collections.png" alt="Curated Collections" width="48%" />
-</p>
+![Home Hero](./docs/home-hero.png)
+
+## 🐟 Curated Collections
+![Curated Collections](./docs/collections.png)
 
 ## 🔐 Authentication
-<p align="center">
-  <img src="./docs/auth-register.png" alt="Register Page" width="48%" />
-  <img src="./docs/auth-login.png" alt="Login Page" width="48%" />
-</p>
+
+### Register Page
+![Register](./docs/auth-register.png)
+
+### Login Page
+![Login](./docs/auth-login.png)
 
 ## 🛒 Cart & Payment Flow
-<p align="center">
-  <img src="./docs/cart-modal.png" alt="Cart Modal" width="48%" />
-  <img src="./docs/cart-redirecting-payment.png" alt="Redirecting to Payment Gateway" width="48%" />
-</p>
-<p align="center">
-  <img src="./docs/cart-payment-success.png" alt="Payment Successful" width="48%" />
-  <img src="./docs/cart-booking-confirmed.png" alt="Booking Confirmed" width="48%" />
-</p>
+
+### 1) Cart Modal with Selected Items
+![Cart Modal](./docs/cart-modal.png)
+
+### 2) Redirecting to Payment Gateway
+![Redirecting Payment](./docs/cart-redirecting-payment.png)
+
+### 3) Payment Successful
+![Payment Successful](./docs/cart-payment-success.png)
+
+### 4) Booking Confirmed
+![Booking Confirmed](./docs/cart-booking-confirmed.png)
 
 ---
 
