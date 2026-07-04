@@ -19,7 +19,7 @@ This project is currently in a migration phase from Vanilla JS UI to React.
 ![Home Hero](./docs/home-hero.png)
 
 ## 🐟 Curated Collections
-![Curated Collections](./docs/curated-collections.png)
+![Curated Collections](./docs/collections.png)
 
 ## 🔐 Authentication
 
