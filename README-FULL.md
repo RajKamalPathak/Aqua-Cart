@@ -1,29 +1,47 @@
 # 🌊 Aqua Cart
 
-> ⚡ Prefer the quick version?  
-> See **[README](README.md)**.
+Aqua Cart is a full-stack e-commerce application for showcasing and selling premium aquarium fish (e.g., Arowana, Koi, Ranchu).
 
-Aqua Cart is a full-stack e-commerce application for showcasing and selling premium aquarium fish (e.g., Arowana, Koi, Ranchu).  
-The repository currently contains:
+This repository currently contains:
 
-- a **legacy Vanilla JS frontend** (`.html/.css/.js`)
-- a **modern React (Vite) frontend** under `Aqua Cart React/`
-- a **Node.js + Express backend API**
-- a **MySQL database schema/seed script**
+- a legacy Vanilla JS frontend (`.html/.css/.js`)
+- a modern React (Vite) frontend under `Aqua Cart React/`
+- a Node.js + Express backend API
+- a MySQL database schema/seed script
 
-> This project is currently in a migration phase from Vanilla JS UI to React.
+This project is currently in a migration phase from Vanilla JS UI to React.
 
 ---
 
 ## 📸 Preview
 
-Add screenshots or GIFs here (recommended):
+## 🏠 Home Experience
+![Home Hero](./docs/home-hero.png)
 
-- Landing page
-- Product listing
-- Cart flow
-- Login/Register
-- Admin/management screens (if available)
+## 🐟 Curated Collections
+![Curated Collections](./docs/curated-collections.png)
+
+## 🔐 Authentication
+
+### Register Page
+![Register](./docs/auth-register.png)
+
+### Login Page
+![Login](./docs/auth-login.png)
+
+## 🛒 Cart & Payment Flow
+
+### 1) Cart Modal with Selected Items
+![Cart Modal](./docs/cart-modal.png)
+
+### 2) Redirecting to Payment Gateway
+![Redirecting Payment](./docs/cart-redirecting-payment.png)
+
+### 3) Payment Successful
+![Payment Successful](./docs/cart-payment-success.png)
+
+### 4) Booking Confirmed
+![Booking Confirmed](./docs/cart-booking-confirmed.png)
 
 ---
 
@@ -57,22 +75,22 @@ Add screenshots or GIFs here (recommended):
 
 ## 🛠️ Tech Stack
 
-**Frontend (Legacy):**
+Frontend (Legacy):
 - HTML5
 - CSS3
 - Vanilla JavaScript (DOM + Fetch API)
 
-**Frontend (Modern):**
+Frontend (Modern):
 - React
 - Vite
 
-**Backend:**
+Backend:
 - Node.js
 - Express
 - CORS
 - mysql2
 
-**Database:**
+Database:
 - MySQL
 
 ---
@@ -81,22 +99,23 @@ Add screenshots or GIFs here (recommended):
 
 ```text
 Aqua-Cart/
-├── Aqua Cart React/         # React + Vite frontend (migration target)
+├── Aqua Cart React/
 │   ├── public/
 │   ├── src/
 │   ├── index.html
 │   ├── package.json
 │   └── vite.config.js
-├── backend/                 # Node.js API server
-│   ├── db.js                # MySQL connection config
-│   ├── server.js            # API routes and server bootstrap
+├── backend/
+│   ├── db.js
+│   ├── server.js
 │   └── package.json
-├── Aqua Cart.html           # Legacy storefront page
-├── Aqua Cart.css            # Legacy storefront styling
-├── Aqua Cart.js             # Legacy frontend logic
-├── Login.html               # Login page
-├── Register.html            # Registration page
-├── aquacart_db.sql          # Database schema + seed
+├── docs/
+├── Aqua Cart.html
+├── Aqua Cart.css
+├── Aqua Cart.js
+├── Login.html
+├── Register.html
+├── aquacart_db.sql
 └── .gitignore
 ```
 
@@ -106,17 +125,15 @@ Aqua-Cart/
 
 Make sure the following are installed:
 
-- **Node.js** 18+ (recommended)
-- **npm** 9+ (or compatible)
-- **MySQL** 8+ (or compatible)
+- Node.js 18+ (recommended)
+- npm 9+ (or compatible)
+- MySQL 8+ (or compatible)
 
 ---
 
 ## ⚙️ Environment Configuration
 
 Create a `.env` file in `backend/` (or update `db.js` if using hardcoded config).
-
-Example:
 
 ```env
 PORT=5000
@@ -127,8 +144,6 @@ DB_NAME=aquacart_db
 DB_PORT=3306
 ```
 
-> If your current code reads directly from `db.js`, migrate credentials to `.env` for safer configuration management.
-
 ---
 
 ## 🗄️ Database Setup
@@ -136,13 +151,9 @@ DB_PORT=3306
 1. Start your MySQL server.
 2. Create/import the database using `aquacart_db.sql`.
 
-Example (CLI):
-
 ```bash
 mysql -u root -p < aquacart_db.sql
 ```
-
-Or import via MySQL Workbench.
 
 ---
 
@@ -163,9 +174,9 @@ npm install
 npm start
 ```
 
-Backend expected at: `http://localhost:5000` (or your configured `PORT`)
+Backend expected at: `http://localhost:5000` (or your configured `PORT`).
 
-### 3) Run React frontend (recommended modern UI)
+### 3) Run React frontend
 
 ```bash
 cd "../Aqua Cart React"
@@ -173,18 +184,15 @@ npm install
 npm run dev
 ```
 
-Frontend expected at Vite default: `http://localhost:5173`
+Frontend expected at: `http://localhost:5173`.
 
 ### 4) Run legacy frontend (optional)
 
-Open `Aqua Cart.html` directly in browser  
-or serve statically with any local server.
+Open `Aqua Cart.html` directly in browser or serve statically with any local server.
 
 ---
 
-## 🔌 API Overview (Document Your Actual Routes)
-
-> Update these endpoints to exactly match `backend/server.js`.
+## 🔌 API Overview
 
 Example route groups:
 - `POST /api/register`
@@ -196,26 +204,11 @@ Example route groups:
 
 ---
 
-## 🧪 Testing & Quality (Recommended Improvements)
-
-Current repo appears focused on implementation. For production hardening, add:
-
-- Unit/integration tests (Jest + Supertest)
-- Input validation (Joi/Zod/express-validator)
-- Password hashing (`bcrypt`)
-- Auth tokens/sessions with secure cookie/JWT practices
-- Rate limiting (`express-rate-limit`)
-- Helmet security headers
-- Structured logging (pino/winston)
-- Linting + formatting (ESLint + Prettier)
-
----
-
 ## 🔐 Security Notes
 
 For real-world deployment:
 
-- Do **not** commit secrets or DB credentials.
+- Do not commit secrets or DB credentials.
 - Use `.env` and secret managers.
 - Hash passwords before storing.
 - Validate and sanitize all user input.
@@ -228,14 +221,9 @@ For real-world deployment:
 
 You can deploy components independently:
 
-- **Frontend (React):** Vercel / Netlify
-- **Backend (Express):** Render / Railway / Fly.io / VPS
-- **Database (MySQL):** PlanetScale / Railway / managed MySQL
-
-Suggested production architecture:
-- React static app + API as separate services
-- Managed DB with backups
-- Environment-based config (`development`, `staging`, `production`)
+- Frontend (React): Vercel / Netlify
+- Backend (Express): Render / Railway / Fly.io / VPS
+- Database (MySQL): PlanetScale / Railway / managed MySQL
 
 ---
 
@@ -261,15 +249,7 @@ Contributions are welcome.
 
 ---
 
-
 ## 👤 Author
 
-**Raj Kamal Pathak**  
+Raj Kamal Pathak  
 GitHub: [@RajKamalPathak](https://github.com/RajKamalPathak)
-
----
-
-## 🙏 Acknowledgements
-
-- Aquarium and aquascaping enthusiast communities
-- Open-source Node.js and React ecosystem
